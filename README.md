@@ -1,2 +1,5 @@
 # Maastopolku
-Ohjelman tarkoituksena on etsiä lyhin mahdollinen polku annetusta pisteestä a pisteeseen b.
+ohjelman tavoitteet löytyvät [täältä](/documentation/tavoitteet.md)
+
+Viikkoraportit:
+- [viikko 1](/documentation/viikkoraportti1.md)
