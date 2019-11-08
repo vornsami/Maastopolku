@@ -23,44 +23,34 @@ public class Main {
         System.out.println("Which map do you want to load?");
             
         String input = reader.nextLine();
-            
         
-        if(input.matches("\\d+")){
+        MapHandler map = new MapHandler();
+        
+        if(map.loadMap(input)){
                 
-            int num = Integer.parseInt(input);
-                
-                //TODO: lataa oikea kartta
-               
-            MapHandler map = new MapHandler();
-            map.loadMap(num);
-                
-                
-            System.out.println("Please input the unit distance");
+             
+            System.out.println("Please input the unit distance.");
                 
             input = reader.nextLine();
                 
             if(input.matches("\\d+")){
                     
-                num = Integer.parseInt(input);
+                int num = Integer.parseInt(input);
                     
-                    //TODO käynnistä haku
+                //TODO käynnistä haku
                     
                     
-                    int col = 16777216 + map.getMap().getPixelReader().getArgb(num, num);
+                int col = 16777216 + map.getMap().getPixelReader().getArgb(num-1, num-1);
                 System.out.println("Leveys on: " + map.getMap().getWidth() + "Korkeus on: " + map.getMap().getHeight() + "num: " + num);
                 System.out.println(col);
                     
                     
                     
             } else  System.out.println("Please input a number.");
-                
-                
-        } else  System.out.println("Please input a number.");
+        } else  System.out.println("Failed to load map with name \"" + input +"\". Please note that maps have to be in .png format. Maps are to be inputted without their file formats.");
             
-            
+        System.out.println("Run stopped.");
             
     }
-        
-        
 }
 
