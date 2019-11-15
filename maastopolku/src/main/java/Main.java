@@ -1,8 +1,9 @@
 
+import functions.Dijkstra;
+import java.util.List;
 import java.util.Scanner;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import map.MapHandler;
+import map.MapPoint;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,12 +38,30 @@ public class Main {
                     
                 int num = Integer.parseInt(input);
                     
-                //TODO käynnistä haku
+                System.out.println("Please input the start point.(a1;a2)");
+               
+                input = reader.nextLine();
+                
+                if(input.matches("\\d+;\\d+")){
+                    String[] start = input.split(";");
                     
+                    System.out.println("Please input the end point.(b1;b2)");
+               
+                    input = reader.nextLine();
                     
-                int col = 16777216 + map.getMap().getPixelReader().getArgb(num-1, num-1);
-                System.out.println("Leveys on: " + map.getMap().getWidth() + "Korkeus on: " + map.getMap().getHeight() + "num: " + num);
-                System.out.println(col);
+                    if(input.matches("\\d+;\\d+")){
+                        
+                        String[] end = input.split(";");
+                        
+                        Dijkstra dijkstra = new Dijkstra();
+                        
+                        List<MapPoint> path = dijkstra.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
+                        
+                        if(!path.isEmpty())path.forEach(a -> System.out.println(a));
+                        
+                        
+                    }else  System.out.println("Incorrect format.");
+                }else  System.out.println("Incorrect format.");
                     
                     
                     

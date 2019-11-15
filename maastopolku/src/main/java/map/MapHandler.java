@@ -16,7 +16,6 @@ import javafx.scene.image.Image;
 public class MapHandler {
     
     Image map;
-    Double[][] array;
     
     public MapHandler(){
         map = null;
@@ -51,47 +50,23 @@ public class MapHandler {
         
     }
     
-    public boolean generateArray(int unit){
-        try{
-            int w = (int) map.getWidth()/unit;
-            int h = (int) map.getHeight()/unit;
-            
-            array = new Double[w][h];
-            
-            for(int i=0;i<w;i++){
-                for(int j=0;j<h;j++){
-                    
-                    array[i][j] = Double.MAX_VALUE;
-                    
-                }
-            }
-            
-        } catch(Exception e){
-             System.out.println("Generation failed due to " + e);
-             return false;
-        }
-        
-        return true;
-    }
-    
     public double distance(double ax, double ay, double bx, double by){
-        return distance(ax,ay,bx,by,1);
+        
+        double spea = speedCalc(ax,ay);
+        double speb = speedCalc(bx,by);
+        double speab = speedCalc(ax + (bx - ax)/2 , ay + (by - ay)/2);
+        
+        double spe = (spea+speb+speab)/3;
+        
+        double distance = Math.sqrt(Math.pow(ax-bx,2)+Math.pow(ay-by,2));
+        
+        return distance * spe;
     }
     
-    public double distance(double ax, double ay, double bx, double by, double mul){
-        
-        double spea = speedCalc(ax,ay,mul);
-        double speb = speedCalc(bx,by,mul);
-        double speab = speedCalc(ax + (bx - ax)/2 , ay + (by - ay)/2,mul);
-        
-        
-        return (spea+speb+speab)/3;
-    }
-    
-    private double speedCalc(double x, double y, double mul){
+    private double speedCalc(double x, double y){
     
         int col = 16777216 + map.getPixelReader().getArgb((int)x, (int)y);
-        double spe = mul;
+        double spe = 1;
         
         
         switch(col){
