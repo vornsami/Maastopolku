@@ -2,8 +2,7 @@
 import functions.Dijkstra;
 import java.util.List;
 import java.util.Scanner;
-import map.MapHandler;
-import map.MapPoint;
+import map.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -57,8 +56,9 @@ public class Main {
                         
                         List<MapPoint> path = dijkstra.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
                         
-                        if(!path.isEmpty())path.forEach(a -> System.out.println(a));
+                        PathDrawer drawer = new PathDrawer();
                         
+                        drawer.draw(map,path);
                         
                     }else  System.out.println("Incorrect format.");
                 }else  System.out.println("Incorrect format.");
