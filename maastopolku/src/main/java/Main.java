@@ -1,5 +1,7 @@
 
+import functions.AStar;
 import functions.Dijkstra;
+import functions.PathFinder;
 import java.util.List;
 import java.util.Scanner;
 import map.*;
@@ -52,13 +54,29 @@ public class Main {
                         
                         String[] end = input.split(";");
                         
-                        Dijkstra dijkstra = new Dijkstra();
+                        long s = System.currentTimeMillis(); 
                         
-                        List<MapPoint> path = dijkstra.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
+                        PathFinder pathfinder = new Dijkstra();
+                        
+                        List<MapPoint> path = pathfinder.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
+                        
+                        long e = System.currentTimeMillis(); 
+                        
+                        System.out.println("Dijkstra: Distance to target: " + path.get( path.size()-1).getDistance() + ", Time taken to reach " + (e-s) + "ms");
                         
                         PathDrawer drawer = new PathDrawer();
                         
-                        drawer.draw(map,path);
+                        drawer.draw(map,path,"dijkstraPath");
+                        
+                        s = System.currentTimeMillis(); 
+                        
+                        pathfinder = new AStar();
+                        path = pathfinder.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
+                        
+                        e = System.currentTimeMillis();
+                        System.out.println("A*: Distance to target: " + path.get( path.size()-1).getDistance() + ", Time taken to reach " + (e-s) + "ms");
+                        
+                        drawer.draw(map,path,"aStarPath");
                         
                     }else  System.out.println("Incorrect format.");
                 }else  System.out.println("Incorrect format.");

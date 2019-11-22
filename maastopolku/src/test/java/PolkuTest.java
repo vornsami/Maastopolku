@@ -77,7 +77,7 @@ public class PolkuTest {
         
         assertEquals(5,map.distance(10.0, 0.0, 14.0, 3.0),0);
     }
-    @Test
+    @Test(timeout = 10000)
     public void dijkstraWorks(){
         MapHandler map = new MapHandler();
         Dijkstra dijkstra = new Dijkstra();
@@ -85,7 +85,7 @@ public class PolkuTest {
         map.loadMap("map1");
         List<MapPoint> results = dijkstra.findPath(8.0, 6.0, 8.0, 54.0, map, 1);
         
-        assertEquals(57.94112549695426,results.get(47).getDistance(),0);
+        assertEquals(57.94112549695426,results.get(results.size()-1).getDistance(),0);
         
         
         

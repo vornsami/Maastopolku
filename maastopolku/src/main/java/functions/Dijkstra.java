@@ -5,7 +5,6 @@
  */
 package functions;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import map.MapHandler;
@@ -15,10 +14,11 @@ import map.MapPoint;
  *
  * @author Sami
  */
-public class Dijkstra {
+public class Dijkstra implements PathFinder{
     
     
-    public List<MapPoint> findPath(Double a1,Double a2,Double b1,Double b2,MapHandler map, int unit){
+    @Override
+    public List<MapPoint> findPath(double x1,double y1,double x2,double y2,MapHandler map, int unit){
         try{
             
             if(map.getMap() == null) throw new Exception("No map loaded");
@@ -40,20 +40,20 @@ public class Dijkstra {
                     
                 }
             }
-            int posX = (int)(a1/unit);
-            int posY = (int)(a2/unit);
+            int posX = (int)(x1/unit);
+            int posY = (int)(y1/unit);
             
             //Asetetaan aloituspiste
             
-            MapPoint start = new MapPoint(a1,a2);
+            MapPoint start = new MapPoint(x1,y1);
             start.setDistance(0);
             
             mapPoints[posX][posY] = start;
             
             llStack.add(start);
-            
+            int arvo = 0;
             while(!llStack.isEmpty()){ //loop
-                
+                arvo++;
                 MapPoint next = llStack.pollFirst();
                 double[] coords = next.getCoordinates();
                 int pX =(int)coords[0]/unit; //K‰‰nnet‰‰n karttapiste taulukkoon
@@ -85,27 +85,20 @@ public class Dijkstra {
                     }
                 }    
             }
+            System.out.println("Points visited: " + arvo);
             
-            List<MapPoint> path = new ArrayList<>();
-            
-            int bX = (int) (b1/unit);
-            int bY = (int) (b2/unit);
+            int bX = (int) (x2/unit);
+            int bY = (int) (y2/unit);
             
             MapPoint point = mapPoints[bX][bY];
+            Tools t = new Tools();
             
-            while(true){
-                
-                path.add(0, point);
-                
-                if(!point.hasPrevious()) break;
-                point = point.getPrevious();
-            }
-            return path;
+            return t.buildPath(point);
             
         } catch(Exception e) {
             System.out.println("Calculation stopped due to " + e);
         }
         
-        return new ArrayList<>();
+        return null;
     }
 }

@@ -16,6 +16,7 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
     double x;
     double y;
     double d;
+    double hd;
     MapPoint p;
     
     public MapPoint(double x,double y){
@@ -23,7 +24,7 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
         this.x = x;
         this.y = y;
         d = Double.MAX_VALUE;
-        
+        hd = Double.MAX_VALUE;
     }
     
     public MapPoint(double x,double y,MapPoint previous){
@@ -36,9 +37,10 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
     }
     
     public void setDistance(double distance){
-        
         d = distance;
-        
+    }
+    public void setDistanceScore(double distanceScore){
+        hd = distanceScore;
     }
     public void setPrevious(MapPoint previous){
         p = previous;
@@ -56,8 +58,10 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
     }
     
     public double getDistance(){
-        
         return d; 
+    }
+    public double getDistanceScore(){
+        return hd; 
     }
     
     public MapPoint getPrevious(){

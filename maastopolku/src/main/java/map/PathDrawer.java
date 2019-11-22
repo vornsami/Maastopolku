@@ -8,11 +8,7 @@ package map;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-import javafx.embed.swing.JFXPanel;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
@@ -23,7 +19,7 @@ import javax.imageio.ImageIO;
  * @author Sami
  */
 public class PathDrawer {
-    public void draw(MapHandler map, List<MapPoint> path){
+    public void draw(MapHandler map, List<MapPoint> path, String name){
         
         WritableImage wImage = new WritableImage((int)map.getMap().getWidth(),(int)map.getMap().getHeight());
         PixelWriter writer = wImage.getPixelWriter();
@@ -43,23 +39,29 @@ public class PathDrawer {
             int x2 = (int) point.x;
             int y2 = (int) point.y;
             
-            int d=1;
-            if(x1>x2) d=-1;
-            
             double k = 0;
             if(x1 != x2)k = (y1-y2)/(x1 -x2);
             double c = y2-k*x2;
             
-            writer.setColor(x2, y2, Color.DARKGREY);
-            
-            for(int i=x1;i!=x2;i+=d){
-                writer.setColor(i, (int)(k*i+c), Color.DARKGREY);
+            if(x1 == x2){
+                int d=1;
+                if(y1>y2) d=-1;
+                
+                for(int i=y1;i!=y2;i+=d){
+                    writer.setColor(x1, i, Color.DARKGREY);
+                }
+                
+            } else {
+                int d=1;
+                if(x1>x2) d=-1;
+                
+                for(int i=x1;i!=x2;i+=d){
+                    writer.setColor(i, (int)(k*i+c), Color.DARKGREY);
+                }
             }
-            
-            
         }
         
-        File file = new File("results\\path.png");
+        File file = new File("results\\"+ name +".png");
         
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(wImage, null), "png", file);
