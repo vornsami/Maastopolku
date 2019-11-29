@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'application'
-
+apply plugin: 'checkstyle'
 
 mainClassName = 'Main'
 
@@ -22,14 +22,13 @@ dependencies {
 
 	check.dependsOn jacocoTestReport
 	
-	
 	apply plugin: 'application'
 
     mainClassName = 'Main'
 	run {
 		standardInput = System.in
 	}
-	
-	
-	
 }
+
+
+

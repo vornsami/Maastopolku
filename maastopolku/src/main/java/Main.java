@@ -1,11 +1,13 @@
 
 import functions.AStar;
+import functions.BellmanFord;
 import functions.Dijkstra;
 import functions.PathFinder;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import map.*;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,73 +23,50 @@ public class Main {
         
         Scanner reader = new Scanner(System.in);
         
-            
         System.out.println("Which map do you want to load?");
-            
         String input = reader.nextLine();
-        
         MapHandler map = new MapHandler();
         
-        if(map.loadMap(input)){
-                
-             
+        if (map.loadMap(input)) {
             System.out.println("Please input the unit distance.");
-                
             input = reader.nextLine();
-                
-            if(input.matches("\\d+")){
-                    
+            if (input.matches("\\d+")) {
                 int num = Integer.parseInt(input);
-                    
-                System.out.println("Please input the start point.(a1;a2)");
-               
-                input = reader.nextLine();
                 
-                if(input.matches("\\d+;\\d+")){
+                System.out.println("Please input the start point.(a1;a2)");
+                input = reader.nextLine();
+                if (input.matches("\\d+;\\d+")) {
                     String[] start = input.split(";");
                     
                     System.out.println("Please input the end point.(b1;b2)");
-               
                     input = reader.nextLine();
-                    
-                    if(input.matches("\\d+;\\d+")){
-                        
+                    if (input.matches("\\d+;\\d+")) {
                         String[] end = input.split(";");
                         
-                        long s = System.currentTimeMillis(); 
+                        List<PathFinder> pathfinder = new ArrayList<>();
+                        Collections.addAll(pathfinder, new BellmanFord(), new Dijkstra(), new AStar());
                         
-                        PathFinder pathfinder = new Dijkstra();
+                        pathfinder.forEach(a -> {
+                            long s = System.currentTimeMillis();
+                            List<MapPoint> path = a.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
+                            long t = System.currentTimeMillis() - s;
+                            System.out.println(a.getName() + ": Distance to target: " + path.get(path.size() - 1).getDistance() + ", Time taken to reach " + t + "ms");
+                            (new PathDrawer()).draw(map, path, a.getName() + "Path", a.getVisited());
+                        });
                         
-                        List<MapPoint> path = pathfinder.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
-                        
-                        long e = System.currentTimeMillis(); 
-                        
-                        System.out.println("Dijkstra: Distance to target: " + path.get( path.size()-1).getDistance() + ", Time taken to reach " + (e-s) + "ms");
-                        
-                        PathDrawer drawer = new PathDrawer();
-                        
-                        drawer.draw(map,path,"dijkstraPath");
-                        
-                        s = System.currentTimeMillis(); 
-                        
-                        pathfinder = new AStar();
-                        path = pathfinder.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
-                        
-                        e = System.currentTimeMillis();
-                        System.out.println("A*: Distance to target: " + path.get( path.size()-1).getDistance() + ", Time taken to reach " + (e-s) + "ms");
-                        
-                        drawer.draw(map,path,"aStarPath");
-                        
-                    }else  System.out.println("Incorrect format.");
-                }else  System.out.println("Incorrect format.");
-                    
-                    
-                    
-            } else  System.out.println("Please input a number.");
-        } else  System.out.println("Failed to load map with name \"" + input +"\". Please note that maps have to be in .png format. Maps are to be inputted without their file formats.");
-            
-        System.out.println("Run stopped.");
-            
+                    } else {
+                        System.out.println("Incorrect format.");
+                    }
+                } else {
+                    System.out.println("Incorrect format.");
+                }
+            } else {
+                System.out.println("Please input a number.");
+            }
+        } else {
+            System.out.println("Failed to load map with name \"" + input + "\". Please note that maps have to be in .png format. Maps are to be inputted without their file formats.");
+        }
+        System.out.println("Run stopped.");   
     }
 }
 

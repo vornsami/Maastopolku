@@ -15,4 +15,6 @@ import map.MapPoint;
  */
 public interface PathFinder {
     public List<MapPoint> findPath(double x1,double y1,double x2,double y2,MapHandler map, int unit);
+    public MapPoint[][] getVisited();
+    public String getName();
 }

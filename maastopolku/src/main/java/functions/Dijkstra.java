@@ -15,90 +15,83 @@ import map.MapPoint;
  * @author Sami
  */
 public class Dijkstra implements PathFinder{
-    
+    MapPoint[][] visited;    
     
     @Override
-    public List<MapPoint> findPath(double x1,double y1,double x2,double y2,MapHandler map, int unit){
+    public List<MapPoint> findPath(double x1, double y1, double x2, double y2, MapHandler map, int unit){
+        
         try{
             
-            if(map.getMap() == null) throw new Exception("No map loaded");
-            
-            //Valmistelut
-            
-            LinkedList<MapPoint> llStack = new LinkedList<>();
-            
-            int w = (int) map.getMap().getWidth()/unit;
-            int h = (int) map.getMap().getHeight()/unit;
-            
-            MapPoint[][] mapPoints = new MapPoint[w][h];
-            Boolean[][] visited = new Boolean[w][h];
-            
-            for(int i=0;i<w;i++){
-                for(int j=0;j<h;j++){
-                    
-                    visited[i][j] = false;
-                    
-                }
+            if(map.getMap() == null) {
+                throw new Exception("No map loaded");
             }
-            int posX = (int)(x1/unit);
-            int posY = (int)(y1/unit);
-            
-            //Asetetaan aloituspiste
-            
-            MapPoint start = new MapPoint(x1,y1);
-            start.setDistance(0);
-            
-            mapPoints[posX][posY] = start;
-            
-            llStack.add(start);
+        
+            LinkedList<MapPoint> llStack = new LinkedList<>();
+
+            Tools t = new Tools();
+
+            int w = (int) map.getMap().getWidth() / unit;
+            int h = (int) map.getMap().getHeight() / unit;
+            MapPoint[][] mapPoints = new MapPoint[w][h];
+
+            int ix = (int) x1 / unit;
+            int iy = (int) y1 / unit;
+
+            mapPoints[ix][iy] = new MapPoint(x1, y1);
+            mapPoints[ix][iy].setDistance(0.0);
+            mapPoints[ix][iy].setDistanceScore(0.0);
+
+            llStack.add(mapPoints[ix][iy]);
             int arvo = 0;
-            while(!llStack.isEmpty()){ //loop
+            while (!llStack.isEmpty()) {
                 arvo++;
                 MapPoint next = llStack.pollFirst();
                 double[] coords = next.getCoordinates();
-                int pX =(int)coords[0]/unit; //K‰‰nnet‰‰n karttapiste taulukkoon
-                int pY =(int)coords[1]/unit;
                 
-                if(!visited[pX][pY]){
-                    visited[pX][pY] = true;
-                    
-                    
-                    for(int i=-1;i<=1;i++){
-                        for(int j=-1;j<=1;j++){ //Lis‰t‰‰n viereiset pisteet
-                            
-                            if(pX <= 0 && i == -1 || pY <= 0 && j == -1) continue;
-                            if(pX >= w-2 && i == 1 || pY >= h-2 && j == 1) continue;
-                            
-                            if((i == j || -i == j) && i == 0) continue; // ohitetaan sama piste
-                                
-                            if(mapPoints[pX+i][pY+j] == null){
-                                mapPoints[pX+i][pY+j] = new MapPoint(coords[0]+i*unit,coords[1]+j*unit,next); //Mik‰li karttapiste ei olemassa, se luodaan
-                            }
-                            double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0]+i*unit, coords[1]+j*unit); // lasketaan pisteen et‰isyys
-                            
-                            if(mapPoints[pX+i][pY+j].trySetDistance(d)){
-                                mapPoints[pX+i][pY+j].setPrevious(next);
-                                llStack.add(mapPoints[pX+i][pY+j]);
-                                
-                            }
+                int pX =(int) coords[0] / unit;
+                int pY =(int) coords[1] / unit;
+                
+                if (pX == (int) (x2 / unit) && pY == (int) (y2 / unit)) {
+                    System.out.println("Points visited: " + arvo);
+                    visited = mapPoints;
+                    return t.buildPath(next);
+                }
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) { //Lis‰t‰‰n viereiset pisteet
+                        if(pX <= 0 && i == -1 || pY <= 0 && j == -1) continue;
+                        if(pX >= w-2 && i == 1 || pY >= h-2 && j == 1) continue;
+
+                        if((i == j || -i == j) && i == 0) {
+                            continue; // ohitetaan sama piste
+                        } 
+
+                        if(mapPoints[pX + i][pY + j] == null){
+                            mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mik‰li karttapiste ei olemassa, se luodaan
+                        }
+                        double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen et‰isyys
+
+                        if(mapPoints[pX + i][pY + j].trySetDistance(d)){
+                            mapPoints[pX + i][pY + j].setPrevious(next);
+                            mapPoints[pX + i][pY + j].setDistanceScore(d);
+                            t.removeDuplicatePoints(llStack, mapPoints[pX + i][pY + j]);
+                            t.compareAdd(llStack, mapPoints[pX + i][pY + j]);
                         }
                     }
-                }    
+                }
             }
-            System.out.println("Points visited: " + arvo);
-            
-            int bX = (int) (x2/unit);
-            int bY = (int) (y2/unit);
-            
-            MapPoint point = mapPoints[bX][bY];
-            Tools t = new Tools();
-            
-            return t.buildPath(point);
-            
         } catch(Exception e) {
-            System.out.println("Calculation stopped due to " + e);
+            System.out.println(e);
         }
-        
         return null;
+    }
+    
+    @Override
+    public MapPoint[][] getVisited(){
+        return visited;
+    }
+
+    @Override
+    public String getName() {
+        return "dijkstra";
     }
 }

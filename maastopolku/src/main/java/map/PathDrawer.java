@@ -19,13 +19,20 @@ import javax.imageio.ImageIO;
  * @author Sami
  */
 public class PathDrawer {
-    public void draw(MapHandler map, List<MapPoint> path, String name){
+    public void draw(MapHandler map, List<MapPoint> path, String name, MapPoint[][] visited){
         
         WritableImage wImage = new WritableImage((int)map.getMap().getWidth(),(int)map.getMap().getHeight());
         PixelWriter writer = wImage.getPixelWriter();
         
         writer.setPixels(0, 0, (int)map.getMap().getWidth(),(int)map.getMap().getHeight(), map.getMap().getPixelReader(), 0, 0);
         
+        for (int i = 0; i < visited.length; i++) {
+            for (int j = 0; j < visited[0].length; j++) {
+                if (visited[i][j] != null) {
+                    writer.setColor((int) visited[i][j].getCoordinates()[0], (int) visited[i][j].getCoordinates()[1], Color.YELLOW);
+                }
+            }
+        }
         
         Iterator iterator = path.iterator();
         iterator.next();

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import functions.AStar;
+import functions.BellmanFord;
 import functions.Dijkstra;
 import java.util.List;
 import map.MapHandler;
@@ -82,14 +84,34 @@ public class PolkuTest {
         MapHandler map = new MapHandler();
         Dijkstra dijkstra = new Dijkstra();
         
+        assertTrue(dijkstra.findPath(8.0, 6.0, 8.0, 54.0, map, 1) == null);
         map.loadMap("map1");
         List<MapPoint> results = dijkstra.findPath(8.0, 6.0, 8.0, 54.0, map, 1);
         
         assertEquals(57.94112549695426,results.get(results.size()-1).getDistance(),0);
-        
-        
-        
-        
     }
+    @Test(timeout = 10000)
+    public void aStarWorks(){
+        MapHandler map = new MapHandler();
+        AStar aStar = new AStar();
+        
+        assertTrue(aStar.findPath(8.0, 6.0, 8.0, 54.0, map, 1) == null);
+        map.loadMap("map1");
+        List<MapPoint> results = aStar.findPath(8.0, 6.0, 8.0, 54.0, map, 1);
+        
+        assertEquals(57.94112549695426,results.get(results.size()-1).getDistance(),0);
+    }
+    @Test(timeout = 10000)
+    public void bellmanFordWorks(){
+        MapHandler map = new MapHandler();
+        BellmanFord bf = new BellmanFord();
+        
+        assertTrue(bf.findPath(8.0, 6.0, 8.0, 54.0, map, 1) == null);
+        map.loadMap("map1");
+        List<MapPoint> results = bf.findPath(8.0, 6.0, 8.0, 54.0, map, 1);
+        
+        assertEquals(57.94112549695426,results.get(results.size()-1).getDistance(),0);
+    }
+
     
 }
