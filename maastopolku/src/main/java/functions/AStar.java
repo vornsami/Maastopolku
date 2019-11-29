@@ -58,6 +58,8 @@ public class AStar implements PathFinder {
 
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) { //Lisätään viereiset pisteet
+                        
+                        // Ohitetaan pisteet kartan ulkopuolella
                         if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
                             continue;
                         }

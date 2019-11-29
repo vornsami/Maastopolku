@@ -19,12 +19,12 @@ import javax.imageio.ImageIO;
  * @author Sami
  */
 public class PathDrawer {
-    public void draw(MapHandler map, List<MapPoint> path, String name, MapPoint[][] visited){
+    public void draw(MapHandler map, List<MapPoint> path, String name, MapPoint[][] visited) {
         
-        WritableImage wImage = new WritableImage((int)map.getMap().getWidth(),(int)map.getMap().getHeight());
+        WritableImage wImage = new WritableImage((int) map.getMap().getWidth(), (int) map.getMap().getHeight());
         PixelWriter writer = wImage.getPixelWriter();
         
-        writer.setPixels(0, 0, (int)map.getMap().getWidth(),(int)map.getMap().getHeight(), map.getMap().getPixelReader(), 0, 0);
+        writer.setPixels(0, 0, (int) map.getMap().getWidth(), (int) map.getMap().getHeight(), map.getMap().getPixelReader(), 0, 0);
         
         for (int i = 0; i < visited.length; i++) {
             for (int j = 0; j < visited[0].length; j++) {
@@ -37,7 +37,7 @@ public class PathDrawer {
         Iterator iterator = path.iterator();
         iterator.next();
         
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             MapPoint point = (MapPoint) iterator.next();
             
             int x1 = (int) point.getPrevious().x;
@@ -47,28 +47,34 @@ public class PathDrawer {
             int y2 = (int) point.y;
             
             double k = 0;
-            if(x1 != x2)k = (y1-y2)/(x1 -x2);
-            double c = y2-k*x2;
+            if (x1 != x2) {
+                k = (y1 - y2) / (x1 - x2);
+            }
+            double c = y2 - k * x2;
             
-            if(x1 == x2){
-                int d=1;
-                if(y1>y2) d=-1;
+            if (x1 == x2) {
+                int d = 1;
+                if (y1 > y2) {
+                    d = -1;
+                }
                 
-                for(int i=y1;i!=y2;i+=d){
+                for (int i = y1; i != y2; i += d) {
                     writer.setColor(x1, i, Color.DARKGREY);
                 }
                 
             } else {
-                int d=1;
-                if(x1>x2) d=-1;
+                int d = 1;
+                if (x1 > x2) {
+                    d = -1;
+                }
                 
-                for(int i=x1;i!=x2;i+=d){
-                    writer.setColor(i, (int)(k*i+c), Color.DARKGREY);
+                for (int i = x1; i != x2; i += d) {
+                    writer.setColor(i, (int) (k * i + c), Color.DARKGREY);
                 }
             }
         }
         
-        File file = new File("results\\"+ name +".png");
+        File file = new File("results\\" + name + ".png");
         
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(wImage, null), "png", file);

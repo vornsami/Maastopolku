@@ -1,4 +1,3 @@
-
 Testit kattavat seuraavat asiat:
 
 Algoritmien tulosten oikeellisuus

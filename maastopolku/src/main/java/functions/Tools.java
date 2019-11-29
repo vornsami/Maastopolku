@@ -16,7 +16,7 @@ import map.MapPoint;
 public class Tools {
     
     public double calcHeurestic(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
     
     public void compareAdd(List<MapPoint> list, MapPoint point) {
@@ -34,7 +34,7 @@ public class Tools {
         }
     }
     
-    public void removeDuplicatePoints(List<MapPoint> list, MapPoint point){
+    public void removeDuplicatePoints(List<MapPoint> list, MapPoint point) {
         double[] pointCoords = point.getCoordinates();
         for (int i = 0; i < list.size(); i++) {
             double[] coords =  list.get(i).getCoordinates();

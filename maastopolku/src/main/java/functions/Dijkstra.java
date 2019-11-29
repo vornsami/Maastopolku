@@ -14,15 +14,14 @@ import map.MapPoint;
  *
  * @author Sami
  */
-public class Dijkstra implements PathFinder{
+public class Dijkstra implements PathFinder {
     MapPoint[][] visited;    
     
     @Override
-    public List<MapPoint> findPath(double x1, double y1, double x2, double y2, MapHandler map, int unit){
+    public List<MapPoint> findPath(double x1, double y1, double x2, double y2, MapHandler map, int unit) {
         
-        try{
-            
-            if(map.getMap() == null) {
+        try {
+            if (map.getMap() == null) {
                 throw new Exception("No map loaded");
             }
         
@@ -48,8 +47,8 @@ public class Dijkstra implements PathFinder{
                 MapPoint next = llStack.pollFirst();
                 double[] coords = next.getCoordinates();
                 
-                int pX =(int) coords[0] / unit;
-                int pY =(int) coords[1] / unit;
+                int pX = (int) coords[0] / unit;
+                int pY = (int) coords[1] / unit;
                 
                 if (pX == (int) (x2 / unit) && pY == (int) (y2 / unit)) {
                     System.out.println("Points visited: " + arvo);
@@ -58,19 +57,25 @@ public class Dijkstra implements PathFinder{
                 }
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) { //Lisätään viereiset pisteet
-                        if(pX <= 0 && i == -1 || pY <= 0 && j == -1) continue;
-                        if(pX >= w-2 && i == 1 || pY >= h-2 && j == 1) continue;
+                        
+                        // Ohitetaan pisteet kartan ulkopuolella
+                        if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
+                            continue;
+                        }
+                        if (pX >= w - 2 && i == 1 || pY >= h - 2 && j == 1) {
+                            continue;
+                        }
 
-                        if((i == j || -i == j) && i == 0) {
+                        if ((i == j || -i == j) && i == 0) {
                             continue; // ohitetaan sama piste
                         } 
 
-                        if(mapPoints[pX + i][pY + j] == null){
+                        if (mapPoints[pX + i][pY + j] == null) {
                             mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mikäli karttapiste ei olemassa, se luodaan
                         }
                         double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen etäisyys
 
-                        if(mapPoints[pX + i][pY + j].trySetDistance(d)){
+                        if (mapPoints[pX + i][pY + j].trySetDistance(d)) {
                             mapPoints[pX + i][pY + j].setPrevious(next);
                             mapPoints[pX + i][pY + j].setDistanceScore(d);
                             t.removeDuplicatePoints(llStack, mapPoints[pX + i][pY + j]);
@@ -79,14 +84,14 @@ public class Dijkstra implements PathFinder{
                     }
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
     
     @Override
-    public MapPoint[][] getVisited(){
+    public MapPoint[][] getVisited() {
         return visited;
     }
 

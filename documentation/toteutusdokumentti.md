@@ -5,12 +5,23 @@ Main.java
     - Ohjelman käynnistys, arvojen syöttäminen ja suorituksen järjestelyt
 
 map
-- mapHandler.java
+
+- MapHandler.java
     - käsittelee kartan lataamisen, mittaamisen ja lukemisen
 
-- djikstra.java
-    - djikstran algoritmin suoritus
- 
+functions
+
+- PathFinder.java
+    - Rajapinta algoritmeille
+
+- Algoritmien toteutukset:
+    - Dijkstra.java
+    - BellmanFord.java
+    - AStar.java
+
+- Tools.java
+    - satunnaisia algoritmien yhteisesti käytettäviä työkaluja 
+
 
 resources-kansioon tulevat karttakuvat.
 

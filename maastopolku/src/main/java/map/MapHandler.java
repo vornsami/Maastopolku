@@ -17,7 +17,7 @@ public class MapHandler {
     
     Image map;
     
-    public MapHandler(){
+    public MapHandler() {
         map = null;
         JFXPanel jfxPanel = new JFXPanel();
     }
@@ -36,7 +36,7 @@ public class MapHandler {
         return true;
     }
     
-    public Image getMap(){
+    public Image getMap() {
         
         return map;
         
@@ -51,11 +51,11 @@ public class MapHandler {
         return distance * spe;
     }
     
-    private double speedCalc(double x, double y){
+    private double speedCalc(double x, double y) {
     
-        int col = 16777216 + map.getPixelReader().getArgb((int)x, (int)y);
+        int col = 16777216 + map.getPixelReader().getArgb((int) x, (int) y);
         double spe = 1;
-        switch(col){
+        switch (col) {
             case 0: spe = Double.MAX_VALUE; 
             case 255: spe *= 0.5;
             case 65280: spe *= 2;

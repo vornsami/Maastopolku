@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @author Sami
  */
-public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
+public class MapPoint {
     
     double x;
     double y;
@@ -19,7 +19,7 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
     double hd;
     MapPoint p;
     
-    public MapPoint(double x,double y){
+    public MapPoint(double x, double y) {
         
         this.x = x;
         this.y = y;
@@ -27,7 +27,7 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
         hd = Double.MAX_VALUE;
     }
     
-    public MapPoint(double x,double y,MapPoint previous){
+    public MapPoint(double x, double y, MapPoint previous) {
         
         this.x = x;
         this.y = y;
@@ -36,63 +36,43 @@ public class MapPoint implements Comparator<MapPoint>, Comparable<MapPoint> {
         
     }
     
-    public void setDistance(double distance){
+    public void setDistance(double distance) {
         d = distance;
     }
-    public void setDistanceScore(double distanceScore){
+    public void setDistanceScore(double distanceScore) {
         hd = distanceScore;
     }
-    public void setPrevious(MapPoint previous){
+    public void setPrevious(MapPoint previous) {
         p = previous;
     }
-    public boolean trySetDistance(double distance){
-        if(d>distance){
+    public boolean trySetDistance(double distance) {
+        if (d > distance) {
             d = distance;
             return true;
         }
         return false;
     }
     
-    public double[] getCoordinates(){
-        return new double[]{x,y};
+    public double[] getCoordinates() {
+        return new double[]{x, y};
     }
     
-    public double getDistance(){
+    public double getDistance() {
         return d; 
     }
-    public double getDistanceScore(){
+    public double getDistanceScore() {
         return hd; 
     }
     
-    public MapPoint getPrevious(){
+    public MapPoint getPrevious() {
         return p;
     } 
     
-    public boolean hasPrevious(){
+    public boolean hasPrevious() {
         return this.p != null;
     }
- 
-
-
     @Override
-    public int compare(MapPoint t, MapPoint t1) {
-        
-        if(t.d != t1.d) return (int)(t.d - t1.d);
-        
-        if(t.x != t1.x) return (int) (t.x - t1.x);
-        
-        return (int) (t.y - t1.y);
-        
-    }
-
-    @Override
-    public int compareTo(MapPoint t) {
-        
-        return compare(this,t);
-        
-    }
-    @Override
-    public String toString(){
-        return  x+","+y+", distance: "+d;
+    public String toString() {
+        return  x + "," + y + ", distance: " + d;
     }
 }
