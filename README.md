@@ -3,7 +3,9 @@
 [Käyttöohje](/documentation/käyttöohje.md)
 
 Ohjelman määrittelydokumentti löytyy [täältä](/documentation/maarittelydokumentti.md)
+
 Toteutuksesta voi lukea [täältä](/documentation/toteutusdokumentti.md)
+
 Testeistä voi lukea  [täältä](/documentation/testusdokumentti.md)
 
 Viikkoraportit:
