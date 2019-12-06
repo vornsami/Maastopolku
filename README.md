@@ -2,6 +2,8 @@
 
 [Käyttöohje](/documentation/käyttöohje.md)
 
+__HUOM__ Ohjelma ei saa tällä hetkellä haettua karttoja Unix-järjestelmissä. Ohjelma toimii normaalisti Windows-käyttöjärjestelmässä-
+
 Ohjelman määrittelydokumentti löytyy [täältä](/documentation/maarittelydokumentti.md)
 
 Toteutuksesta voi lukea [täältä](/documentation/toteutusdokumentti.md)

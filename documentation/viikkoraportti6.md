@@ -6,5 +6,6 @@ Tein korjauksen, joka saattaa toimia, mutta minulla ei juuri nyt ole unix-käytt
 Tehtiin tehostuksia dijkstran- ja A*-algoritmeihin.
 Tehtiin checkstyle-korjauksia
 Tehtiin testauksia ja laajennettiin testausdokumenttia.
+Lisättiin suoritustulokset toteutusdokumenttiin
 
-Aikaa käytetty yhteensä: ~5-6h
+Aikaa käytetty yhteensä: ~8-9h

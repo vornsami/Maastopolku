@@ -1,3 +1,5 @@
+package systems;
+
 
 import functions.AStar;
 import functions.BellmanFord;
@@ -27,7 +29,9 @@ public class Main {
         String input = reader.nextLine();
         MapHandler map = new MapHandler();
         
-        if (map.loadMap(input)) {
+        if (input.equals("run tests")) {
+            (new Tester()).test();
+        } else if (map.loadMap(input)) {
             System.out.println("Please input the unit distance.");
             input = reader.nextLine();
             if (input.matches("\\d+")) {
@@ -53,7 +57,7 @@ public class Main {
                             if (path == null) {
                                 System.out.println("No path found for " + a.getName());
                             } else { 
-                                System.out.println(a.getName() + ": Distance to target: " + path.get(path.size() - 1).getDistance() + ", Time taken to reach " + t + "ms " + "pathpoints: " + path.size());
+                                System.out.println(a.getName() + ": Points visited: " + a.getVisitCount() + "Distance to target: " + path.get(path.size() - 1).getDistance() + ", Time taken to reach " + t + "ms");
                                 (new PathDrawer()).draw(map, path, a.getName() + "Path", a.getVisited());
                             }
                         });
@@ -67,7 +71,7 @@ public class Main {
             } else {
                 System.out.println("Please input a number.");
             }
-        } else {
+        }  else {
             System.out.println("Failed to load map with name \"" + input + "\". Please note that maps have to be in .png format. Maps are to be inputted without their file formats.");
         }
         System.out.println("Run stopped.");   

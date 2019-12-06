@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import systems.Tester;
 
 /**
  *
@@ -112,6 +113,10 @@ public class PolkuTest {
         
         assertEquals(57.94112549695426,results.get(results.size()-1).getDistance(),0);
     }
-
-    
+    @Test(timeout = 10000)
+     public void testsWork(){
+        Tester tester = new Tester();
+                
+        tester.test();
+     }
 }

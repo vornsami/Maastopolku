@@ -17,11 +17,12 @@ import map.MapPointComparator;
  * @author Sami
  */
 public class Dijkstra implements PathFinder {
-    MapPoint[][] visited;    
+    MapPoint[][] visited;
+    long visitCount;    
     
     @Override
     public List<MapPoint> findPath(double x1, double y1, double x2, double y2, MapHandler map, int unit) {
-        
+        visitCount = 0;
         try {
             
             if (map.getMap() == null) {
@@ -45,10 +46,10 @@ public class Dijkstra implements PathFinder {
             mapPoints[ix][iy].setDistanceScore(0.0);
 
             pQueue.add(mapPoints[ix][iy]);
-            int arvo = 0;
+            
             
             while (!pQueue.isEmpty()) {
-                arvo++;
+                visitCount++;
                 MapPoint next = pQueue.poll();
                 double[] coords = next.getCoordinates();
                 
@@ -56,7 +57,6 @@ public class Dijkstra implements PathFinder {
                 int pY = (int) coords[1] / unit;
                 
                 if (pX == (int) (x2 / unit) && pY == (int) (y2 / unit)) {
-                    System.out.println("Points visited: " + arvo);
                     visited = mapPoints; // talletetaan tutkitut pisteet niiden piirtoa varten
                     return t.buildPath(next);
                 }
@@ -109,5 +109,10 @@ public class Dijkstra implements PathFinder {
     @Override
     public String getName() {
         return "dijkstra";
+    }
+
+    @Override
+    public long getVisitCount() {
+        return visitCount;
     }
 }

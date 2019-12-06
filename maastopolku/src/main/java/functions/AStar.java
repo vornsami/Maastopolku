@@ -18,9 +18,11 @@ import map.MapPointComparator;
  */
 public class AStar implements PathFinder {
     MapPoint[][] visited;
+    long visitCount;
+    
     @Override
     public List<MapPoint> findPath(double x1, double y1, double x2, double y2, MapHandler map, int unit) {
-        
+        visitCount = 0;
         try {
             
             if (map.getMap() == null) {
@@ -44,10 +46,9 @@ public class AStar implements PathFinder {
             mapPoints[ix][iy].setDistanceScore(t.calcHeurestic(x1, y1, x2, y2));
 
             pQueue.add(mapPoints[ix][iy]);
-            int arvo = 0;
             
             while (!pQueue.isEmpty()) {
-                arvo++;
+                visitCount++;
                 MapPoint next = pQueue.poll();
                 double[] coords = next.getCoordinates();
                 
@@ -55,7 +56,6 @@ public class AStar implements PathFinder {
                 int pY = (int) coords[1] / unit;
                 
                 if (pX == (int) (x2 / unit) && pY == (int) (y2 / unit)) {
-                    System.out.println("Points visited: " + arvo);
                     visited = mapPoints; // talletetaan tutkitut pisteet niiden piirtoa varten
                     return t.buildPath(next);
                 }
@@ -111,5 +111,10 @@ public class AStar implements PathFinder {
     @Override
     public String getName() {
         return "aStar";
+    }
+
+    @Override
+    public long getVisitCount() {
+        return visitCount;
     }
 }

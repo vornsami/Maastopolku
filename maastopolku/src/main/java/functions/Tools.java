@@ -20,32 +20,6 @@ public class Tools {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
     
-    public void compareAdd(List<MapPoint> list, MapPoint point) { // Lis‰‰ pisteen listaan distanceScore-arvo j‰rjesstykseen.
-        for (int i = 0; 0 < list.size(); i++) {
-            if (list.get(i).getDistanceScore() > point.getDistanceScore()) {
-                list.add(i, point);
-                break;
-            } else if (i == list.size() - 1) {
-                list.add(i + 1, point);
-                break;
-            }
-        }
-        if (list.isEmpty()) {
-            list.add(point);
-        }
-    }
-    
-    public void removeDuplicatePoints(List<MapPoint> list, MapPoint point) { // poistaa listasta annetun pisteen duplikaatit, mik‰li niiden et‰isyysarvo on huonompi.
-        double[] pointCoords = point.getCoordinates();
-        for (int i = 0; i < list.size(); i++) {
-            double[] coords =  list.get(i).getCoordinates();
-            if ((coords[0] == pointCoords[0] && coords[1] == pointCoords[1]) && list.get(i).getDistanceScore() >= point.getDistanceScore()) {
-                list.remove(i);
-            }
-        }
-    }
-    
-    
     public List<MapPoint> buildPath(MapPoint point) { // Palauttaa polun alusta loppuun listana.
         List<MapPoint> finalPath = new ArrayList<>();
         MapPoint tempPoint = point;

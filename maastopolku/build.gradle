@@ -3,7 +3,7 @@ apply plugin: 'jacoco'
 apply plugin: 'application'
 apply plugin: 'checkstyle'
 
-mainClassName = 'Main'
+mainClassName = 'systems.Main'
 
 repositories {
     jcenter()
@@ -24,7 +24,7 @@ dependencies {
 	
 	apply plugin: 'application'
 
-    mainClassName = 'Main'
+    mainClassName = 'systems.Main'
 	run {
 		standardInput = System.in
 	}

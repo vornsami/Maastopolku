@@ -15,10 +15,12 @@ import map.MapPoint;
  * @author Sami
  */
 public class BellmanFord implements PathFinder {
-    MapPoint[][] visited;    
+    MapPoint[][] visited;   
+    long visitCount;     
     
     @Override
     public List<MapPoint> findPath(double x1, double y1, double x2, double y2, MapHandler map, int unit) {
+        visitCount = 0;
         try {
             
             if (map.getMap() == null) {
@@ -51,9 +53,8 @@ public class BellmanFord implements PathFinder {
             mapPoints[posX][posY] = start;
             
             llStack.add(start);
-            int arvo = 0;
             while (!llStack.isEmpty()) { //loop
-                arvo++;
+                visitCount++;
                 MapPoint next = llStack.pollFirst();
                 double[] coords = next.getCoordinates();
                 int pX = (int) coords[0] / unit; // K‰‰nnet‰‰n karttapiste taulukkoon
@@ -64,7 +65,6 @@ public class BellmanFord implements PathFinder {
                     this.checknext(llStack, next, mapPoints, map, unit, w, h, coords);
                 }    
             }
-            System.out.println("Points visited: " + arvo);
             
             int bX = (int) (x2 / unit);
             int bY = (int) (y2 / unit);
@@ -121,5 +121,10 @@ public class BellmanFord implements PathFinder {
     @Override
     public String getName() {
         return "bellman-ford";
+    }
+
+    @Override
+    public long getVisitCount() {
+        return visitCount;
     }
 }

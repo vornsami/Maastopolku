@@ -36,7 +36,7 @@ public class MapHandler {
             
             System.out.println("Map " + i + ".png was loaded!");
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e + " while trying to load " + i);
             return false;
         }
         return true;
