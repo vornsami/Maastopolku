@@ -15,39 +15,39 @@ public class MapPoint {
     
     double x;
     double y;
-    double d;
-    double hd;
-    MapPoint p;
+    double distance;
+    double distanceScore;
+    MapPoint previous;
     
     public MapPoint(double x, double y) {
         
         this.x = x;
         this.y = y;
-        d = Double.MAX_VALUE;
-        hd = Double.MAX_VALUE;
+        distance = Double.MAX_VALUE;
+        distanceScore = Double.MAX_VALUE;
     }
     
-    public MapPoint(double x, double y, MapPoint previous) {
+    public MapPoint(double x, double y, MapPoint p) {
         
         this.x = x;
         this.y = y;
-        d = Double.MAX_VALUE;
-        p = previous;
+        distance = Double.MAX_VALUE;
+        previous = p;
         
     }
     
-    public void setDistance(double distance) {
-        d = distance;
+    public void setDistance(double d) {
+        distance = d;
     }
-    public void setDistanceScore(double distanceScore) {
-        hd = distanceScore;
+    public void setDistanceScore(double hd) {
+        distanceScore = hd;
     }
-    public void setPrevious(MapPoint previous) {
-        p = previous;
+    public void setPrevious(MapPoint p) {
+        previous = p;
     }
-    public boolean trySetDistance(double distance) {
-        if (d > distance) {
-            d = distance;
+    public boolean trySetDistance(double d) {
+        if (distance > d) {
+            distance = d;
             return true;
         }
         return false;
@@ -58,21 +58,21 @@ public class MapPoint {
     }
     
     public double getDistance() {
-        return d; 
+        return distance; 
     }
     public double getDistanceScore() {
-        return hd; 
+        return distanceScore; 
     }
     
     public MapPoint getPrevious() {
-        return p;
+        return previous;
     } 
     
     public boolean hasPrevious() {
-        return this.p != null;
+        return this.previous != null;
     }
     @Override
     public String toString() {
-        return  x + "," + y + ", distance: " + d;
+        return  x + ";" + y + ", distance: " + distance;
     }
 }

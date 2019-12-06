@@ -7,6 +7,7 @@ package functions;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import map.MapHandler;
 import map.MapPoint;
 
@@ -33,11 +34,11 @@ public class BellmanFord implements PathFinder {
             int h = (int) map.getMap().getHeight() / unit;
             
             MapPoint[][] mapPoints = new MapPoint[w][h];
-            Boolean[][] visited = new Boolean[w][h];
+            Boolean[][] hasVisited = new Boolean[w][h];
             
             for (int i = 0; i < w; i++) {
                 for (int j = 0; j < h; j++) {
-                    visited[i][j] = false;
+                    hasVisited[i][j] = false;
                 }
             }
             int posX = (int) (x1 / unit);
@@ -56,37 +57,12 @@ public class BellmanFord implements PathFinder {
                 arvo++;
                 MapPoint next = llStack.pollFirst();
                 double[] coords = next.getCoordinates();
-                int pX = (int) coords[0] / unit; //K‰‰nnet‰‰n karttapiste taulukkoon
+                int pX = (int) coords[0] / unit; // K‰‰nnet‰‰n karttapiste taulukkoon
                 int pY = (int) coords[1] / unit;
                 
-                if (!visited[pX][pY]) {
-                    visited[pX][pY] = true;
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) { //Lis‰t‰‰n viereiset pisteet
-                            
-                            // Ohitetaan pisteet kartan ulkopuolella
-                            if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
-                                continue; 
-                            }
-                            if (pX >= w - 2 && i == 1 || pY >= h - 2 && j == 1) {
-                                continue;
-                            }
-                            
-                            if((i == j || -i == j) && i == 0) {
-                                continue; // ohitetaan sama piste
-                            } 
-                                
-                            if (mapPoints[pX + i][pY + j] == null) {
-                                mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mik‰li karttapiste ei olemassa, se luodaan
-                            }
-                            double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen et‰isyys
-                            
-                            if (mapPoints[pX + i][pY + j].trySetDistance(d)) {
-                                mapPoints[pX + i][pY + j].setPrevious(next);
-                                llStack.add(mapPoints[pX + i][pY + j]);
-                            }
-                        }
-                    }
+                if (!hasVisited[pX][pY]) {
+                    hasVisited[pX][pY] = true;
+                    this.checknext(llStack, next, mapPoints, map, unit, w, h, coords);
                 }    
             }
             System.out.println("Points visited: " + arvo);
@@ -96,8 +72,8 @@ public class BellmanFord implements PathFinder {
             
             MapPoint point = mapPoints[bX][bY];
             Tools t = new Tools();
-            this.visited = mapPoints;
-            return t.buildPath(point);
+            this.visited = mapPoints; // talletetaan tutkitut pisteet niiden piirtoa varten
+            return t.buildPath(point, unit); 
             
         } catch (Exception e) {
             System.out.println("Calculation stopped due to " + e);
@@ -105,6 +81,39 @@ public class BellmanFord implements PathFinder {
         
         return null;
     }
+    private void checknext(LinkedList llStack, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, int width, int heigth, double[] coords){
+        
+        int pX = (int) coords[0] / unit; // K‰‰nnet‰‰n karttapiste taulukkoon
+        int pY = (int) coords[1] / unit;
+        
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) { // Lis‰t‰‰n viereiset pisteet
+
+                // Ohitetaan pisteet kartan ulkopuolella
+                if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
+                    continue; 
+                }
+                if (pX >= width - 2 && i == 1 || pY >= heigth - 2 && j == 1) {
+                    continue;
+                }
+
+                if((i == j || -i == j) && i == 0) {
+                    continue; // ohitetaan sama piste
+                } 
+
+                if (mapPoints[pX + i][pY + j] == null) {
+                    mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mik‰li karttapiste ei olemassa, se luodaan
+                }
+                double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen et‰isyys
+
+                if (mapPoints[pX + i][pY + j].trySetDistance(d)) {
+                    mapPoints[pX + i][pY + j].setPrevious(next); 
+                    llStack.add(mapPoints[pX + i][pY + j]); // asetetaan tutkittavaksi
+                }
+            }
+        }
+    }
+        
     @Override
     public MapPoint[][] getVisited() {
         return visited;

@@ -50,8 +50,14 @@ public class Main {
                             long s = System.currentTimeMillis();
                             List<MapPoint> path = a.findPath(Double.parseDouble(start[0]), Double.parseDouble(start[1]), Double.parseDouble(end[0]), Double.parseDouble(end[1]), map, num);
                             long t = System.currentTimeMillis() - s;
-                            System.out.println(a.getName() + ": Distance to target: " + path.get(path.size() - 1).getDistance() + ", Time taken to reach " + t + "ms");
-                            (new PathDrawer()).draw(map, path, a.getName() + "Path", a.getVisited());
+                            if (path == null) {
+                                System.out.println("No path found for " + a.getName());
+                            } else { 
+                                System.out.println(a.getName() + ": Distance to target: " + path.get(path.size() - 1).getDistance() + ", Time taken to reach " + t + "ms " + "pathpoints: " + path.size());
+                                (new PathDrawer()).draw(map, path, a.getName() + "Path", a.getVisited());
+                                path.forEach(b -> System.out.println(b));
+                            }
+                            
                         });
                         
                     } else {

@@ -53,7 +53,7 @@ public class PolkuTest {
         assertEquals(true,point.trySetDistance(1.1));
         assertEquals(1.1,point.getDistance(),0);
         
-        assertEquals("0.0,0.0, distance: 1.1", point.toString());
+        assertEquals("0.0;0.0, distance: 1.1", point.toString());
         
         MapPoint nextPoint = new MapPoint(1.0,1.0,point);
         
