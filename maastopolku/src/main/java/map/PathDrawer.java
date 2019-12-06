@@ -79,7 +79,7 @@ public class PathDrawer {
         if (System.getProperty("os.name").contains("Windows")) { // havaitaan käyttöjärjestelmä
             file = new File("results\\" + name + ".png"); // tallennetaan tiedosto
         } else {
-            file = new File(System.getProperty("user.dir") + "\\results\\" + name + ".png"); // Ilmeisesti unix- systeemit käsittelevät tiedostojen sijainnit eri tavalla kuin Windows-järjestelmät.
+            file = new File("/results/" + name + ".png"); // Ilmeisesti unix- systeemit käsittelevät tiedostojen sijainnit eri tavalla kuin Windows-järjestelmät.
         }    
         
         try {

@@ -31,7 +31,7 @@ public class MapHandler {
             if (System.getProperty("os.name").contains("Windows")) { // Havaitaan käyttöjärjestelmä
                 map = new Image("\\maps\\" + i + ".png"); // Ladataan kartta
             } else {
-                map = new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\maps\\" + i + ".png"); // Ilmeisesti unix- systeemit käsittelevät tiedostojen sijainnit eri tavalla kuin Windows-järjestelmät.
+                map = new Image("/src/main/resources/maps/" + i + ".png"); // Ilmeisesti unix- systeemit käsittelevät tiedostojen sijainnit eri tavalla kuin Windows-järjestelmät.
             }
             
             System.out.println("Map " + i + ".png was loaded!");
