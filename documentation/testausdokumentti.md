@@ -4,11 +4,11 @@ Jacocon avulla on mitattu testien kattauudeksi 75%. Tämä voi kuitenkin olla v�
 
 __Kattavusraportit:__
 
-![-](testikattavuus_kaikki.png)
+![](testikattavuus_kaikki.PNG)
 
-![-](testikattavuus_map.png)
+![](testikattavuus_map.PNG)
 
-![-](testikattavuus_systems.png)
+![](testikattavuus_systems.PNG)
 
-![-](testikattavuus_functions.png)
+![](testikattavuus_functions.PNG)
 
