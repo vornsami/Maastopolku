@@ -8,7 +8,7 @@ Ohjelman määrittelydokumentti löytyy [täältä](/documentation/maarittelydok
 
 Toteutuksesta voi lukea [täältä](/documentation/toteutusdokumentti.md)
 
-Testeistä voi lukea  [täältä](/documentation/testusdokumentti.md)
+Testeistä voi lukea  [täältä](/documentation/testausdokumentti.md)
 
 Viikkoraportit:
 - [viikko 1](/documentation/viikkoraportti1.md)
@@ -16,3 +16,4 @@ Viikkoraportit:
 - [viikko 3](/documentation/viikkoraportti3.md)
 - [viikko 4](/documentation/viikkoraportti4.md)
 - [viikko 5](/documentation/viikkoraportti5.md)
+- [viikko 6](/documentation/viikkoraportti6.md)
