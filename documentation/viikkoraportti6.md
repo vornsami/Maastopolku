@@ -7,5 +7,6 @@ Tehtiin tehostuksia dijkstran- ja A*-algoritmeihin.
 Tehtiin checkstyle-korjauksia
 Tehtiin testauksia ja laajennettiin testausdokumenttia.
 Lisättiin suoritustulokset toteutusdokumenttiin
+Muutettiin kansiorakennetta ja lisättiin suoritustestaus
 
 Aikaa käytetty yhteensä: ~8-9h
