@@ -55,9 +55,7 @@ public class Main {
                             } else { 
                                 System.out.println(a.getName() + ": Distance to target: " + path.get(path.size() - 1).getDistance() + ", Time taken to reach " + t + "ms " + "pathpoints: " + path.size());
                                 (new PathDrawer()).draw(map, path, a.getName() + "Path", a.getVisited());
-                                path.forEach(b -> System.out.println(b));
                             }
-                            
                         });
                         
                     } else {

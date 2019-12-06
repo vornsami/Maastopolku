@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @author Sami
  */
-public class MapPointComparator implements Comparator{
+public class MapPointComparator implements Comparator {
 
     @Override
     public int compare(Object t, Object t1) {

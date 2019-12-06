@@ -6,7 +6,6 @@
 package functions;
 
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import map.MapHandler;
@@ -69,7 +68,7 @@ public class Dijkstra implements PathFinder {
         return null;
     }
     
-    private void checkNext(PriorityQueue pQueue, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, int width, int heigth, double[] coords){ // tarkastelee kaikki pisteen viereiset pisteet
+    private void checkNext(PriorityQueue pQueue, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, int width, int heigth, double[] coords) { // tarkastelee kaikki pisteen viereiset pisteet
         
         int pX = (int) coords[0] / unit;
         int pY = (int) coords[1] / unit;

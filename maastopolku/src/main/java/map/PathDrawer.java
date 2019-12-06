@@ -73,7 +73,7 @@ public class PathDrawer {
                 }
             }
         }
-        writer.setColor((int) path.get(path.size()-1).x, (int) path.get(path.size()-1).y, Color.DARKGREY); // kohdepisteen värjäys
+        writer.setColor((int) path.get(path.size() - 1).x, (int) path.get(path.size() - 1).y, Color.DARKGREY); // kohdepisteen värjäys
         
         File file = null;
         if (System.getProperty("os.name").contains("Windows")) { // havaitaan käyttöjärjestelmä

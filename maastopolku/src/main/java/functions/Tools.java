@@ -61,7 +61,7 @@ public class Tools {
         return finalPath;    
     }
     
-    private void checkCorrectness(List<MapPoint> path, int unit){ // korjaa virheen, jossa et‰isyydet ovat tietyiss‰ tilanteissa jostakin syyst‰ v‰‰rin Astar-luokassa
+    private void checkCorrectness(List<MapPoint> path, int unit) { // korjaa virheen, jossa et‰isyydet ovat tietyiss‰ tilanteissa jostakin syyst‰ v‰‰rin Astar-luokassa
         Iterator iterator = path.iterator();
         iterator.next();
         while (true) {
@@ -78,12 +78,12 @@ public class Tools {
             
             if (x1 == x2 || y1 == y2) {
                 if (delta >= unit + 0.0001 || delta <= unit - 0.0001) {
-                    System.out.println("There is a mistake, expected " + unit + ", was " + delta);
+                    // System.out.println("There is a mistake, expected " + unit + ", was " + delta);
                     this.fixDistances(path, point, unit - delta);
                 }
             } else {
                 if (delta >= (Math.sqrt(2) * unit) + 0.0001 || delta <= (Math.sqrt(2) * unit) - 0.0001) {
-                    System.out.println("There is a mistake, expected " + Math.sqrt(2) + ", was " + delta);
+                    // System.out.println("There is a mistake, expected " + Math.sqrt(2) + ", was " + delta);
                     this.fixDistances(path, point, (Math.sqrt(2) * unit) - delta);
                 }
             }
@@ -94,7 +94,7 @@ public class Tools {
         }
     }
     private void fixDistances(List<MapPoint> path, MapPoint point, double amount) {
-        MapPoint p = path.get(path.size()-1);
+        MapPoint p = path.get(path.size() - 1);
         
         p.setDistance(p.getDistance() + amount);
         
@@ -102,11 +102,5 @@ public class Tools {
             p.getPrevious();
             p.setDistance(p.getDistance() + amount);
         }
-        
-        
     }
-    
-    
-    
-    
 }

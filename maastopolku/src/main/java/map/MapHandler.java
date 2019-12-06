@@ -51,7 +51,7 @@ public class MapHandler {
     public double distance(double ax, double ay, double bx, double by) {
         double spea = speedCalc(ax, ay); // laskee maastossa liikkumisnopeuden alussa
         double speb = speedCalc(bx, by); // laskee maastossa liikkumisnopeuden lopussa
-        double speab = speedCalc(ax + (bx - ax) / 2, ay + (by - ay) / 2);// laskee maastossa liikkumisnopeuden pisteiden välissä
+        double speab = speedCalc(ax + (bx - ax) / 2, ay + (by - ay) / 2); // laskee maastossa liikkumisnopeuden pisteiden välissä
         double spe = (spea + speb + speab) / 3; // laskee keskinopeuden
         double distance = Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2)); // laskee pisteiden etäisyyden toisistaan
         return distance * spe; // palauttaa "liikkumisajan"

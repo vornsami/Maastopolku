@@ -67,7 +67,7 @@ public class AStar implements PathFinder {
         return null;
     }
     
-    private void checkNext(PriorityQueue pQueue, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, double x2, double y2, int width, int heigth, double[] coords){ // tarkastelee kaikki pisteen viereiset pisteet
+    private void checkNext(PriorityQueue pQueue, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, double x2, double y2, int width, int heigth, double[] coords) { // tarkastelee kaikki pisteen viereiset pisteet
         
         int pX = (int) coords[0] / unit;
         int pY = (int) coords[1] / unit;

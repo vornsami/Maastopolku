@@ -7,7 +7,6 @@ package functions;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import map.MapHandler;
 import map.MapPoint;
 
@@ -81,7 +80,7 @@ public class BellmanFord implements PathFinder {
         
         return null;
     }
-    private void checknext(LinkedList llStack, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, int width, int heigth, double[] coords){
+    private void checknext(LinkedList llStack, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, int width, int heigth, double[] coords) {
         
         int pX = (int) coords[0] / unit; // K‰‰nnet‰‰n karttapiste taulukkoon
         int pY = (int) coords[1] / unit;
@@ -97,7 +96,7 @@ public class BellmanFord implements PathFinder {
                     continue;
                 }
 
-                if((i == j || -i == j) && i == 0) {
+                if ((i == j || -i == j) && i == 0) {
                     continue; // ohitetaan sama piste
                 } 
 
