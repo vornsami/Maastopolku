@@ -57,7 +57,7 @@ public class AStar implements PathFinder {
                 if (pX == (int) (x2 / unit) && pY == (int) (y2 / unit)) {
                     System.out.println("Points visited: " + arvo);
                     visited = mapPoints; // talletetaan tutkitut pisteet niiden piirtoa varten
-                    return t.buildPath(next, unit);
+                    return t.buildPath(next);
                 }
                 this.checkNext(pQueue, next, mapPoints, map, unit, x2, y2, width, heigth, coords);
             }
@@ -79,7 +79,7 @@ public class AStar implements PathFinder {
                 if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
                     continue;
                 }
-                if (pX >= width - 2 && i == 1 || pY >= heigth - 2 && j == 1) {
+                if (pX >= width - 1 && i == 1 || pY >= heigth - 1 && j == 1) {
                     continue;
                 }
 

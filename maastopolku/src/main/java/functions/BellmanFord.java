@@ -72,7 +72,7 @@ public class BellmanFord implements PathFinder {
             MapPoint point = mapPoints[bX][bY];
             Tools t = new Tools();
             this.visited = mapPoints; // talletetaan tutkitut pisteet niiden piirtoa varten
-            return t.buildPath(point, unit); 
+            return t.buildPath(point); 
             
         } catch (Exception e) {
             System.out.println("Calculation stopped due to " + e);
@@ -92,7 +92,7 @@ public class BellmanFord implements PathFinder {
                 if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
                     continue; 
                 }
-                if (pX >= width - 2 && i == 1 || pY >= heigth - 2 && j == 1) {
+                if (pX >= width - 1 && i == 1 || pY >= heigth - 1 && j == 1) {
                     continue;
                 }
 

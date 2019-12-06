@@ -15,7 +15,7 @@ public class MapPointComparator implements Comparator {
 
     @Override
     public int compare(Object t, Object t1) {
-        return (int) (((MapPoint) t).distanceScore - ((MapPoint) t1).distanceScore);
+        return (int) ((((MapPoint) t).distanceScore * 10) - (((MapPoint) t1).distanceScore) * 10); // kerrotaan kymmenellä erottaaksemme pienet erot
     }
     
     public int compare(MapPoint mp, MapPoint mp1) {

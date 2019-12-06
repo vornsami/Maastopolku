@@ -46,7 +46,7 @@ public class Tools {
     }
     
     
-    public List<MapPoint> buildPath(MapPoint point, int unit) { // Palauttaa polun alusta loppuun listana.
+    public List<MapPoint> buildPath(MapPoint point) { // Palauttaa polun alusta loppuun listana.
         List<MapPoint> finalPath = new ArrayList<>();
         MapPoint tempPoint = point;
         while (true) {
@@ -57,50 +57,6 @@ public class Tools {
             }
             tempPoint = tempPoint.getPrevious();
         }
-        this.checkCorrectness(finalPath, unit);
         return finalPath;    
-    }
-    
-    private void checkCorrectness(List<MapPoint> path, int unit) { // korjaa virheen, jossa etäisyydet ovat tietyissä tilanteissa jostakin syystä väärin Astar-luokassa
-        Iterator iterator = path.iterator();
-        iterator.next();
-        while (true) {
-            MapPoint point = (MapPoint) iterator.next();
-            MapPoint previous = point.getPrevious();
-            
-            int x1 = (int) previous.getCoordinates()[0];
-            int y1 = (int) previous.getCoordinates()[1];
-            
-            int x2 = (int) point.getCoordinates()[0];
-            int y2 = (int) point.getCoordinates()[1];
-            
-            double delta = point.getDistance() - previous.getDistance();
-            
-            if (x1 == x2 || y1 == y2) {
-                if (delta >= unit + 0.0001 || delta <= unit - 0.0001) {
-                    // System.out.println("There is a mistake, expected " + unit + ", was " + delta);
-                    this.fixDistances(path, point, unit - delta);
-                }
-            } else {
-                if (delta >= (Math.sqrt(2) * unit) + 0.0001 || delta <= (Math.sqrt(2) * unit) - 0.0001) {
-                    // System.out.println("There is a mistake, expected " + Math.sqrt(2) + ", was " + delta);
-                    this.fixDistances(path, point, (Math.sqrt(2) * unit) - delta);
-                }
-            }
-            
-            if (!iterator.hasNext()) {
-                break;
-            }
-        }
-    }
-    private void fixDistances(List<MapPoint> path, MapPoint point, double amount) {
-        MapPoint p = path.get(path.size() - 1);
-        
-        p.setDistance(p.getDistance() + amount);
-        
-        while (p != point) {
-            p.getPrevious();
-            p.setDistance(p.getDistance() + amount);
-        }
     }
 }
