@@ -51,8 +51,8 @@ public class MapHandler {
     public double distance(double ax, double ay, double bx, double by) {
         double spea = speedCalc(ax, ay); // laskee maastossa liikkumisnopeuden alussa
         double speb = speedCalc(bx, by); // laskee maastossa liikkumisnopeuden lopussa
-        double speab = speedCalc(ax + (bx - ax) / 2, ay + (by - ay) / 2); // laskee maastossa liikkumisnopeuden pisteiden v‰liss‰
-        double spe = (spea + speb + speab) / 3; // laskee keskinopeuden
+        // double speab = speedCalc(ax + (bx - ax) / 2, ay + (by - ay) / 2); // laskee maastossa liikkumisnopeuden pisteiden v‰liss‰
+        double spe = (spea + speb) / 2; // laskee keskinopeuden
         double distance = Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2)); // laskee pisteiden et‰isyyden toisistaan
         return distance * spe; // palauttaa "liikkumisajan"
     }
@@ -62,11 +62,21 @@ public class MapHandler {
         int col = 16777216 + map.getPixelReader().getArgb((int) x, (int) y); // hae pikselin v‰ri (palauttaa negatiivisen arvon, niin lis‰t‰‰n 16777216)
         double spe = 1;
         switch (col) {
-            case 0: spe = Double.MAX_VALUE; // sein‰, ei liikuttavissa l‰pi
-            case 255: spe *= 0.001; // sininen, nopea liikkua
-            case 65280: spe *= 4; // vihre‰, hidas liikkua
-            case 16711680: spe *= 20; // punainen, eritt‰in hidas liikkua
-            case 16777215: spe *= 1; // valkoinen, ei muutosta
+            case 0: 
+                spe = Double.MAX_VALUE; // sein‰, ei liikuttavissa l‰pi
+                break;
+            case 255: 
+                spe *= 0.3; // sininen, nopea liikkua
+                break;
+            case 65280: 
+                spe *= 5; // vihre‰, hidas liikkua
+                break;
+            case 16711680: 
+                spe *= 20; // punainen, eritt‰in hidas liikkua
+                break;
+            case 16777215: 
+                spe *= 1; // valkoinen, ei muutosta
+                break;
         }
         return spe;
     }

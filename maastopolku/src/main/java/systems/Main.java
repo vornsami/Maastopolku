@@ -64,8 +64,6 @@ public class Main extends Application {
                 start = new double[2];
                 start[0] = event.getX();
                 start[1] = event.getY();
-                
-                System.out.println(start[0] + ", " + start[1]);
             } else if (end == null) {
                 end = new double[2];
                 end[0] = event.getX();
@@ -75,12 +73,6 @@ public class Main extends Application {
                 stage.close();
             }
         });
-        
-        
-        
-        
-        
-        
         
         AnchorPane.setTopAnchor(imgView, 10.0);
         AnchorPane.setLeftAnchor(imgView, 10.0);
@@ -129,7 +121,10 @@ public class Main extends Application {
     
     private void runPathfinders(MapHandler map, int unit, double[] start, double[] end){
         List<PathFinder> pathfinder = new ArrayList<>();
-        Collections.addAll(pathfinder, new BellmanFord(), new Dijkstra(), new AStar());
+        Collections.addAll(pathfinder, 
+                new BellmanFord(), 
+                new Dijkstra(), 
+                new AStar());
 
         pathfinder.forEach(a -> {
             long s = System.currentTimeMillis();

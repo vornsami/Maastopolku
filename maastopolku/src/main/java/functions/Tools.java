@@ -6,7 +6,6 @@
 package functions;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import map.MapPoint;
 
@@ -17,7 +16,14 @@ import map.MapPoint;
 public class Tools {
     
     public double calcHeurestic(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        double x = Math.abs(x1 - x2);
+        double y = Math.abs(y1 - y2);
+        
+        if (x > y) {
+            return Math.sqrt(2) * y + x - y;
+        } else {
+            return Math.sqrt(2) * x + y - x;
+        }
     }
     
     public List<MapPoint> buildPath(MapPoint point) { // Palauttaa polun alusta loppuun listana.

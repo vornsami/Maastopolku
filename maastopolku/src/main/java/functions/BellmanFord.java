@@ -57,13 +57,8 @@ public class BellmanFord implements PathFinder {
                 visitCount++;
                 MapPoint next = llStack.pollFirst();
                 double[] coords = next.getCoordinates();
-                int pX = (int) coords[0] / unit; // K‰‰nnet‰‰n karttapiste taulukkoon
-                int pY = (int) coords[1] / unit;
                 
-                if (!hasVisited[pX][pY]) {
-                    hasVisited[pX][pY] = true;
-                    this.checknext(llStack, next, mapPoints, map, unit, w, h, coords);
-                }    
+                this.checknext(llStack, next, mapPoints, map, unit, w, h, coords);
             }
             
             int bX = (int) (x2 / unit);
