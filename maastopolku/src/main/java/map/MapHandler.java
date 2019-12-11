@@ -63,9 +63,9 @@ public class MapHandler {
         double spe = 1;
         switch (col) {
             case 0: spe = Double.MAX_VALUE; // seinä, ei liikuttavissa läpi
-            case 255: spe *= 0.5; // sininen, nopea liikkua
-            case 65280: spe *= 2; // vihreä, hidas liikkua
-            case 16711680: spe *= 4; // punainen, erittäin hidas liikkua
+            case 255: spe *= 0.001; // sininen, nopea liikkua
+            case 65280: spe *= 4; // vihreä, hidas liikkua
+            case 16711680: spe *= 20; // punainen, erittäin hidas liikkua
             case 16777215: spe *= 1; // valkoinen, ei muutosta
         }
         return spe;

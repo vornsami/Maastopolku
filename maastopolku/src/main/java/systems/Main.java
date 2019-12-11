@@ -5,7 +5,6 @@ import functions.AStar;
 import functions.BellmanFord;
 import functions.Dijkstra;
 import functions.PathFinder;
-import java.awt.MouseInfo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,8 +33,9 @@ public class Main extends Application {
     
     public static void main(String[] args) {
         
-        
         Application.launch(args);
+        
+        System.out.println("Run stopped");
         
     }
 
