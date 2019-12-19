@@ -9,7 +9,8 @@ Lähteet:
 
 A*-algoritmin pseudokoodi: (Wikipedia)[https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode]
 
-Ohjelmassa käytetty kartta sc_FloodedPlains: (movingailabs)[https://www.movingai.com/benchmarks/], Starcraft 1.
+Ohjelmassa käytetyt kartat sc_FloodedPlains ja sc_Crossroads: (movingailabs)[https://www.movingai.com/benchmarks/], Starcraft 1.
+Kuva maastokartta.png ja siitä johdettu kartta nuuksio.png: (retkikartta.fi)[https://www.retkikartta.fi/], nuuksion alue
 
 
  
