@@ -11,9 +11,7 @@ import functions.Dijkstra;
 import functions.PathFinder;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import map.MapHandler;
-import map.MapPoint;
 
 /**
  *

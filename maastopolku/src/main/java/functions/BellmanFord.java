@@ -77,11 +77,11 @@ public class BellmanFord implements PathFinder {
     }
     private void checknext(LinkedList llStack, MapPoint next, MapPoint[][] mapPoints, MapHandler map, int unit, int width, int heigth, double[] coords) {
         
-        int pX = (int) coords[0] / unit; // K‰‰nnet‰‰n karttapiste taulukkoon
+        int pX = (int) coords[0] / unit; // Kaannetaan karttapiste taulukkoon
         int pY = (int) coords[1] / unit;
         
         for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) { // Lis‰t‰‰n viereiset pisteet
+            for (int j = -1; j <= 1; j++) { // Lisataan viereiset pisteet
 
                 // Ohitetaan pisteet kartan ulkopuolella
                 if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
@@ -96,9 +96,9 @@ public class BellmanFord implements PathFinder {
                 } 
 
                 if (mapPoints[pX + i][pY + j] == null) {
-                    mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mik‰li karttapiste ei olemassa, se luodaan
+                    mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mikali karttapiste ei olemassa, se luodaan
                 }
-                double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen et‰isyys
+                double d = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen etaisyys
 
                 if (mapPoints[pX + i][pY + j].trySetDistance(d)) {
                     mapPoints[pX + i][pY + j].setPrevious(next); 

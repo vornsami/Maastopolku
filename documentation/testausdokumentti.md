@@ -8,7 +8,5 @@ __Kattavusraportit:__
 
 ![](testikattavuus_map.PNG)
 
-![](testikattavuus_systems.PNG)
-
 ![](testikattavuus_functions.PNG)
 

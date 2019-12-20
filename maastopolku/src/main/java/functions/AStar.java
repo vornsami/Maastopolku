@@ -73,7 +73,7 @@ public class AStar implements PathFinder {
         int pY = (int) coords[1] / unit;
 
         for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) { //Lisätään viereiset pisteet
+            for (int j = -1; j <= 1; j++) { //Lisataan viereiset pisteet
 
                 // Ohitetaan pisteet kartan ulkopuolella
                 if (pX <= 0 && i == -1 || pY <= 0 && j == -1) {
@@ -88,9 +88,9 @@ public class AStar implements PathFinder {
                 } 
 
                 if (mapPoints[pX + i][pY + j] == null) {
-                    mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mikäli karttapiste ei olemassa, se luodaan
+                    mapPoints[pX + i][pY + j] = new MapPoint(coords[0] + i * unit, coords[1] + j * unit, next); //Mikali karttapiste ei olemassa, se luodaan
                 }
-                double distance = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen etäisyys
+                double distance = next.getDistance() + map.distance(coords[0], coords[1], coords[0] + i * unit, coords[1] + j * unit); // lasketaan pisteen etaisyys
 
                 if (mapPoints[pX + i][pY + j].trySetDistance(distance)) {
                     mapPoints[pX + i][pY + j].setPrevious(next);
