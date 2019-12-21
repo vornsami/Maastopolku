@@ -10,6 +10,8 @@ package map;
  * @author Sami
  */
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.Image;
 
@@ -22,39 +24,52 @@ public class MapHandler {
         JFXPanel jfxPanel = new JFXPanel();
     }
     
+    /** Loads map with given name i.
+     * Returns true if a valid map was loaded.
+     * @param i image name
+     * @return returns true if a map was loaded
+     */
     public boolean loadMap(String i) {
         try {
             if (i.matches(".(\\|;|.|,|(|)|[|]).")) {
                 throw new Exception("Input contains illegal characters."); // Hylataan laittomat merkit
             }
-            String fs = System.getProperty("file.separator");
+            String fs = System.getProperty("file.separator"); // Pyydetaan erottaja
+            Path filepath = Paths.get("maps" + fs + i + ".png"); // Etsitaan tiedostopolku
             
-            map = new Image(fs + "maps" + fs + i + ".png"); 
-            
-            /*if (System.getProperty("os.name").contains("Windows")) { // Havaitaan kayttojarjestelma
-                map = new Image(fs + "maps" + fs + i + ".png"); // Ladataan kartta
-            } else {
-                map = new Image("/src/main/resources/maps/" + i + ".png"); // Ilmeisesti unix- systeemit kasittelevat tiedostojen sijainnit eri tavalla kuin Windows-jarjestelmat.
-            }*/
-            
+            map = new Image(filepath.toUri().toString());  // haetaan kuva
+            if (map.getHeight() == 0) { // tarkastetaan kuvan olemassaolo
+                throw new Exception("No such map."); 
+            }
             System.out.println("Map " + i + ".png was loaded!");
         } catch (Exception e) {
-            System.out.println(e + " while trying to load " + i);
+            System.out.println(e);
             return false;
         }
         return true;
     }
     
+    /**
+     *
+     * @return Returns map
+     */
     public Image getMap() {
         
         return map;
         
     }
     
+    /**
+     * Calculates the distance between points a and b on the map.
+     * @param ax x coordinate of point a
+     * @param ay y coordinate of point a
+     * @param bx x coordinate of point b
+     * @param by y coordinate of point b
+     * @return the calculated distance
+     */
     public double distance(double ax, double ay, double bx, double by) {
         double spea = speedCalc(ax, ay); // laskee maastossa liikkumisnopeuden alussa
         double speb = speedCalc(bx, by); // laskee maastossa liikkumisnopeuden lopussa
-        // double speab = speedCalc(ax + (bx - ax) / 2, ay + (by - ay) / 2); // laskee maastossa liikkumisnopeuden pisteiden valissa
         double spe = (spea + speb) / 2; // laskee keskinopeuden
         double distance = Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2)); // laskee pisteiden etaisyyden toisistaan
         return distance * spe; // palauttaa "liikkumisajan"

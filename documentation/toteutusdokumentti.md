@@ -49,25 +49,35 @@ Käytetty yksikkömitta kaikissa testeissä on 1.
 Testit voi suorittaa itse kirjoittamalla "run tests", kun ohjelma kysyy karttaa.
 
 
-Blanks, across			100				500				1000
+Blanks, across			100				250				500				750				1000
 ---------------------------------
-bellman-ford   		|	33ms, 10132 visited 	|	267ms, 271564 visited 	|	584ms, 1032584 visited 
-dijkstra   		|	14ms, 10132 visited 	|	417ms, 271559 visited 	|	905ms, 1032566 visited 
-aStar   		|	1ms, 100 visited 	|	3ms, 500 visited 	|	2ms, 1000 visited 
+bellman-ford   		|	20ms, 10132 visited 	|	82ms, 73694 visited 	|	155ms, 271564 visited 	|	228ms, 589600 visited 	|	525ms, 1032584 visited 
+dijkstra   		|	12ms, 10132 visited 	|	55ms, 73693 visited 	|	322ms, 271559 visited 	|	281ms, 589590 visited 	|	536ms, 1032566 visited 
+aStar   		|	2ms, 100 visited 	|	1ms, 250 visited 	|	1ms, 500 visited 	|	1ms, 750 visited 	|	2ms, 1000 visited 
 
-Blanks, middle			100				500				1000
+Blanks, middle			100				250				500				750				1000
 ---------------------------------
-bellman-ford   		|	5ms, 10132 visited 	|	89ms, 271564 visited 	|	590ms, 1032584 visited 
-dijkstra   		|	1ms, 3531 visited 	|	52ms, 102750 visited 	|	214ms, 378543 visited 
-aStar   		|	0ms, 50 visited 	|	0ms, 250 visited 	|	2ms, 500 visited 
+bellman-ford   		|	5ms, 10132 visited 	|	24ms, 73694 visited 	|	157ms, 271564 visited 	|	196ms, 589600 visited 	|	746ms, 1032584 visited 
+dijkstra   		|	2ms, 3531 visited 	|	11ms, 25878 visited 	|	46ms, 102750 visited 	|	107ms, 220166 visited 	|	180ms, 378543 visited 
+aStar   		|	0ms, 50 visited 	|	0ms, 125 visited 	|	0ms, 250 visited 	|	1ms, 375 visited 	|	0ms, 500 visited 
 
-Tests, across			100				500				1000
+Blocks, across			100				250				500				750				1000
 ---------------------------------
-bellman-ford   		|	3ms, 7148 visited 	|	67ms, 182023 visited 	|	333ms, 672584 visited 
-dijkstra   		|	4ms, 7147 visited 	|	93ms, 182021 visited 	|	451ms, 672574 visited 
-aStar   		|	7ms, 10481 visited 	|	153ms, 249544 visited 	|	1217ms, 995340 visited 
+bellman-ford   		|	2ms, 7620 visited 	|	15ms, 47428 visited 	|	89ms, 184415 visited 	|	115ms, 390692 visited 	|	205ms, 677376 visited 
+dijkstra   		|	3ms, 7147 visited 	|	20ms, 46236 visited 	|	122ms, 182020 visited 	|	180ms, 387085 visited 	|	311ms, 672559 visited 
+aStar   		|	6ms, 6279 visited 	|	35ms, 37597 visited 	|	95ms, 173745 visited 	|	242ms, 348464 visited 	|	266ms, 576784 visited 
 
-Erityisen huomattavaa on, kuinka A* tutkii huomattavasti enemmän solmuja esteiden läsnäollessa. A* tutkii esteen kanssa kaikista eniten solmuja jokaisessa karttakoossa. 
-Bellman-Ford on huomattavasti nopeampi kahdessa jälkimmäisessä testissä kuin Blanks-across -testissä. Tämä varmaan johtuu suoritusjärjestyksestä. Ensimmäisten Bellman-Ford -kutsujen aikana saattaa olla sovelluksen muita suorituksia edelleen meneillään, hidastaen suoritusta.
-A* vaikuttaa olevan kaikista hitain esteen kanssa. 
 
+Huomioita:
+
+- Erityisen huomattavaa on, kuinka A* tutkii huomattavasti enemmän solmuja esteiden läsnäollessa. Tutkittujen solmujen määrä lähestyy muita algoritmeja
+- Bellman-Ford on huomattavasti nopeampi Blanks, middle -testissä kuin Blanks, across -testissä. Tämä varmaan johtuu suoritusjärjestyksestä. Ensimmäisten Bellman-Ford -kutsujen aikana saattaa olla sovelluksen muita suorituksia edelleen meneillään, hidastaen algoritmin suoritusta.
+- Blocks-testeissä Bellman-Ford vaikuttaisi olevan nopein. Tämä johtunee siitä, että se käsittelee yksittäisen solmun nopeiten, ja Blocks-kartat saavat kaikki algoritmit käsittelemään suurin piirtein saman määrän solmuja.
+- Blocks-testeissä Dijkstran ja A*:n nopeudet ovat hyvin lähellä toisiaan. 
+
+
+__Tulosten oikeellisuus__
+
+Kaikki algoritmit antavat oikean tuloksen kartalla, joissa kuljettava alue on vain yhtä väriä. 
+A* voi antaa pidempiä reittejä kartoilla, joissa on useampia kulkunopeuksia, mikäli algoritmi jättää nämä reitit tutkimatta. Tämä on ongelma, joka johtuu A* algoritmin toimintatavasta. 
+Dijkstra ja Bellman-Ford antavat aina oikean tuloksen kartasta riippumatta.

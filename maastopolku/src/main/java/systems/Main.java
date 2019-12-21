@@ -45,9 +45,15 @@ public class Main extends Application {
         MapHandler map = this.askMap();
         if (map != null) {
             int unit = this.askUnit();
-            if(unit > 0) {
+            if (unit > 0) {
                 setup(stage, map, unit);
+            } else {
+                stage.show();
+                stage.close();
             }
+        } else {
+            stage.show();
+            stage.close();
         }
     }
     
@@ -119,7 +125,7 @@ public class Main extends Application {
         return -1;
     }
     
-    private void runPathfinders(MapHandler map, int unit, double[] start, double[] end){
+    private void runPathfinders(MapHandler map, int unit, double[] start, double[] end) {
         List<PathFinder> pathfinder = new ArrayList<>();
         Collections.addAll(pathfinder, 
                 new BellmanFord(), 

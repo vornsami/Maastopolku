@@ -6,6 +6,8 @@
 package systems;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import javafx.embed.swing.SwingFXUtils;
@@ -21,6 +23,15 @@ import map.MapPoint;
  * @author Sami
  */
 public class PathDrawer {
+
+    /**
+     * Draws a path to the given map following the points given, and saves the result as an image.
+     * 
+     * @param map Mat to be used
+     * @param path List of points containing the whole map
+     * @param name The name to be given to the image
+     * @param visited A table containing all of the points the algorithm has created
+     */
     public void draw(MapHandler map, List<MapPoint> path, String name, MapPoint[][] visited) {
         
         WritableImage wImage = new WritableImage((int) map.getMap().getWidth(), (int) map.getMap().getHeight());
@@ -78,8 +89,10 @@ public class PathDrawer {
         writer.setColor((int) path.get(path.size() - 1).getCoordinates()[0], (int) path.get(path.size() - 1).getCoordinates()[1], Color.DARKGREY); // kohdepisteen varjays
         
         String fs = System.getProperty("file.separator");
-            
-        File file = new File(fs + "results" + fs  + name + ".png"); 
+        Path filepath = Paths.get("results" + fs  + name + ".png");
+        
+        System.out.println("Result image can be found at " + filepath.toUri().toString() + "\n");
+        File file = new File(filepath.toUri()); 
         
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(wImage, null), "png", file);

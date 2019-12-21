@@ -17,3 +17,4 @@ Viikkoraportit:
 - [viikko 4](/documentation/viikkoraportti4.md)
 - [viikko 5](/documentation/viikkoraportti5.md)
 - [viikko 6](/documentation/viikkoraportti6.md)
+- [viikko 7](/documentation/viikkoraportti7.md)

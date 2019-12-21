@@ -1,6 +1,9 @@
 
-Ohjelma on testattu automaattisilla testeillä, jotka kattavat koko ohjelman suorituksen poislukien PathDrawer- ja Main-luokat. 
-Jacocon avulla on mitattu testien kattauudeksi 75%. Tämä voi kuitenkin olla vähemmän epäillyn käyttöjärjestelmään liittyän ongelman vuoksi.
+Ohjelma on testattu automaattisilla testeillä. Testit tarkastavat algoritmien oikeellisuuden, MapPoint-luokan toiminnan ja karttojen käsittelyn. 
+
+Systems-paketin sisältämät luokat ovat jätetty testaamatta, sillä niiden toiminta on riippuvaista käyttöliittymistä.
+
+Jacocon avulla on mitattu testien kattauudeksi 97%.
 
 __Kattavusraportit:__
 
