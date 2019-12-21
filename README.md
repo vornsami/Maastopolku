@@ -1,6 +1,6 @@
 # Maastopolku
 
-[__Uusin release__](https://github.com/vornsami/Maastopolku/releases/tag/1.0)
+[__Uusin release__](https://github.com/vornsami/Maastopolku/releases/tag/1.1)
 
 [Käyttöohje](/documentation/käyttöohje.md)
 
