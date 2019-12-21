@@ -10,6 +10,7 @@ Jar-tiedostoa käytettäessä siirry komentokehotteessa kansioon, jonne olet sen
 
 	java -jar maastopolku.jar
 
+Varmista, että jar-tiedoston kanssa samassa kansiossa on kansiot "maps" ja "results". Ilman niitä ohjelma ei toimi.
 
 __Kartat__
 
