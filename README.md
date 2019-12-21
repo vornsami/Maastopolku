@@ -1,8 +1,8 @@
 # Maastopolku
 
-[Käyttöohje](/documentation/käyttöohje.md)
+[__Uusin release__](https://github.com/vornsami/Maastopolku/releases/tag/1.0)
 
-__HUOM__ Ohjelma ei saa tällä hetkellä haettua karttoja Unix-järjestelmissä. Ohjelma toimii normaalisti Windows-käyttöjärjestelmässä-
+[Käyttöohje](/documentation/käyttöohje.md)
 
 Ohjelman määrittelydokumentti löytyy [täältä](/documentation/maarittelydokumentti.md)
 
